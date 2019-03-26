@@ -4,7 +4,9 @@ import {
   unless,
   every,
   some,
-  unary
+  unary,
+  once,
+  memorized
 } from '../lib/es6-functional'
 
 /**
@@ -19,14 +21,14 @@ import {
 /**
  * forEachObject
  */
-let object = {a:1,b:2}
-class newObjectFn {
-  constructor () {
-    this.c = 3
-  }
-}
-newObjectFn.prototype = object
-let newObject = new newObjectFn() 
+// let object = {a:1,b:2}
+// class newObjectFn {
+//   constructor () {
+//     this.c = 3
+//   }
+// }
+// newObjectFn.prototype = object
+// let newObject = new newObjectFn() 
 // forEachObject(newObject, (key, value) => console.log(`${key}是${value}`))
 
 /**
@@ -53,7 +55,35 @@ let newObject = new newObjectFn()
 /**
  * unary
  */
-let array = ['1', '2', '3']
-console.log(array.map(parseInt))
-console.log(array.map(unary(parseInt)))
+// let array = ['1', '2', '3']
+// console.log(array.map(parseInt))
+// console.log(array.map(unary(parseInt)))
+
+/**
+ * once
+ */
+// let doPayment = once(() => {
+//   console.log('payment is done')
+// })
+// console.log('第一次')
+// doPayment()
+// console.log('第二次')
+// doPayment()
+
+/**
+ * memorized
+ */
+let factorial = memorized((number) => {
+  if(number === 1) {
+    return 1
+  }
+  return number * factorial(number - 1)
+})
+
+console.time('1')
+console.log(factorial(20))
+console.timeEnd('1')
+console.time('2')
+console.log(factorial(21))
+console.timeEnd('2')
 

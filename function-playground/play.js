@@ -3,13 +3,14 @@ import {
   forEachObject,
   unless,
   every,
-  some
+  some,
+  unary
 } from '../lib/es6-functional'
 
 /**
  * forEach
  */
-let array = [1,2,3]
+// let array = [1,2,3]
 // forEach(array,(data) => console.log(data))
 
 // console.log('********乘以2**********')
@@ -46,5 +47,13 @@ let newObject = new newObjectFn()
 /**
  * some
  */
-console.log(some([1,NaN,3],isNaN))
-console.log(some([1,2,3],isNaN))
+// console.log(some([1,NaN,3],isNaN))
+// console.log(some([1,2,3],isNaN))
+
+/**
+ * unary
+ */
+let array = ['1', '2', '3']
+console.log(array.map(parseInt))
+console.log(array.map(unary(parseInt)))
+

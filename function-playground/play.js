@@ -6,8 +6,12 @@ import {
   some,
   unary,
   once,
-  memorized
+  memorized,
+  map,
+  filter,
+  concatAll
 } from '../lib/es6-functional'
+// import {arrayUtils} from '../lib/es6-functional'
 
 /**
  * forEach
@@ -73,17 +77,33 @@ import {
 /**
  * memorized
  */
-let factorial = memorized((number) => {
-  if(number === 1) {
-    return 1
-  }
-  return number * factorial(number - 1)
-})
+// let factorial = memorized((number) => {
+//   if(number === 1) {
+//     return 1
+//   }
+//   return number * factorial(number - 1)
+// })
 
-console.time('1')
-console.log(factorial(20))
-console.timeEnd('1')
-console.time('2')
-console.log(factorial(21))
-console.timeEnd('2')
+// console.time('1')
+// console.log(factorial(20))
+// console.timeEnd('1')
+// console.time('2')
+// console.log(factorial(21))
+// console.timeEnd('2')
+
+/**
+ * map
+ */
+// console.log(map([1,2,3],(value) => value * value))
+
+/**
+ * filter
+ */
+
+//  console.log(filter([1,2,3,4],value => value > 2))
+
+/**
+ * concatAll
+ */
+console.log(concatAll([[1,2,3],[4,5,6]]))
 

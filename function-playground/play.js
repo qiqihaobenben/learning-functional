@@ -9,7 +9,10 @@ import {
   memorized,
   map,
   filter,
-  concatAll
+  concatAll,
+  reduce,
+  zip,
+  carry
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -105,5 +108,21 @@ import {
 /**
  * concatAll
  */
-console.log(concatAll([[1,2,3],[4,5,6]]))
+// console.log(concatAll([[1,2,3],[4,5,6]]))
 
+/**
+ * reduce
+ */
+// console.log(reduce([1,2,3], (accumlator,value) => accumlator + value))
+
+/**
+ * zip
+ */
+// console.log(zip([1,2,3],[4,5],(x,y) => x*y))
+
+/**
+ * carry
+ */
+
+ const multiply = (x,y,z) => x * y * z;
+ console.log(carry(multiply)(2)(3)(4))

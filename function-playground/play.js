@@ -13,7 +13,8 @@ import {
   reduce,
   zip,
   carry,
-  partial
+  partial,
+  compose
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -131,10 +132,35 @@ import {
 /**
  * partial
  */
-let delayTenMs = partial(setTimeout,undefined,3000)
-delayTenMs(() => {
-  console.log("DO Y task1") 
-  delayTenMs(() => {
-    console.log("DO Y task2")
-  })
-})
+// let delayTenMs = partial(setTimeout,undefined,3000)
+// delayTenMs(() => {
+//   console.log("DO Y task1") 
+//   delayTenMs(() => {
+//     console.log("DO Y task2")
+//   })
+// })
+
+/**
+ * compose
+ */
+let getNumberLt5 = partial(filter,undefined,(value) => value.number > 5)
+let getName = partial(map,undefined,(value) => value.name)
+let data = [{
+  name: 123,
+  number: 4
+}, {
+  name: 333,
+  number: 10
+}, {
+  name: 567,
+  number: 6
+}, {
+  name: "sss",
+  number: 7
+}, {
+  name: "eee",
+  number: 3
+}, ]
+
+let getLt5Name = compose(getName,getNumberLt5)
+console.log(getLt5Name(data))

@@ -12,7 +12,8 @@ import {
   concatAll,
   reduce,
   zip,
-  carry
+  carry,
+  partial
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -124,5 +125,16 @@ import {
  * carry
  */
 
- const multiply = (x,y,z) => x * y * z;
- console.log(carry(multiply)(2)(3)(4))
+//  const multiply = (x,y,z) => x * y * z;
+//  console.log(carry(multiply)(2)(3)(4))
+
+/**
+ * partial
+ */
+let delayTenMs = partial(setTimeout,undefined,3000)
+delayTenMs(() => {
+  console.log("DO Y task1") 
+  delayTenMs(() => {
+    console.log("DO Y task2")
+  })
+})

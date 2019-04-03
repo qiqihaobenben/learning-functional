@@ -171,11 +171,11 @@ import {
 /**
  * composeN
  */
-let splitIntoSpace = (str) => str.split(' ')
-let count = (array) => array.length
-let oddOrEven = (count) => count % 2 === 0 ? 'even' : 'odd'
-const countWords = composeN(composeN(oddOrEven, identity, count), identity, splitIntoSpace)
-console.log(countWords('make smaller or less in amount'))
+// let splitIntoSpace = (str) => str.split(' ')
+// let count = (array) => array.length
+// let oddOrEven = (count) => count % 2 === 0 ? 'even' : 'odd'
+// const countWords = composeN(composeN(oddOrEven, identity, count), identity, splitIntoSpace)
+// console.log(countWords('make smaller or less in amount'))
 
 /**
  * pipe
@@ -186,3 +186,47 @@ console.log(countWords('make smaller or less in amount'))
 // const countWords = pipe(splitIntoSpace,count,oddOrEven)
 // console.log(countWords('make smaller or less in amount'))
 
+
+
+/**
+ * generator
+ */
+// function* gen () {
+//   return 'first generator';
+// }
+
+// let generatorResult = gen()
+// console.log(generatorResult.next())
+
+// function* sayFullName() {
+//   let firstName = yield;
+//   let lastName = yield;
+//   console.log(firstName + lastName)
+// }
+
+// let fullName = sayFullName()
+// fullName.next()
+// console.log(fullName.next('chen'))
+// fullName.next('fangxu')
+
+function* main() {
+  let a = yield 2;
+  console.log('a : ',a)
+  let dataOne = yield getDataOne()
+  let dataTwo = yield getDataTwo()
+  console.log('data one: ',dataOne)
+  console.log('data two: ',dataTwo)
+}
+let generator = main()
+function getDataOne() {
+  setTimeout(() => {
+    generator.next('dummy one')
+  }, 1000);
+}
+function getDataTwo() {
+  setTimeout(() => {
+    generator.next('dummy two')
+  }, 2000);
+}
+generator.next()
+generator.next()

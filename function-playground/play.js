@@ -14,7 +14,10 @@ import {
   zip,
   carry,
   partial,
-  compose
+  compose,
+  composeN,
+  pipe,
+  identity
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -143,24 +146,43 @@ import {
 /**
  * compose
  */
-let getNumberLt5 = partial(filter,undefined,(value) => value.number > 5)
-let getName = partial(map,undefined,(value) => value.name)
-let data = [{
-  name: 123,
-  number: 4
-}, {
-  name: 333,
-  number: 10
-}, {
-  name: 567,
-  number: 6
-}, {
-  name: "sss",
-  number: 7
-}, {
-  name: "eee",
-  number: 3
-}, ]
+// let getNumberLt5 = partial(filter,undefined,(value) => value.number > 5)
+// let getName = partial(map,undefined,(value) => value.name)
+// let data = [{
+//   name: 123,
+//   number: 4
+// }, {
+//   name: 333,
+//   number: 10
+// }, {
+//   name: 567,
+//   number: 6
+// }, {
+//   name: "sss",
+//   number: 7
+// }, {
+//   name: "eee",
+//   number: 3
+// }, ]
 
-let getLt5Name = compose(getName,getNumberLt5)
-console.log(getLt5Name(data))
+// let getLt5Name = compose(getName,getNumberLt5)
+// console.log(getLt5Name(data))
+
+/**
+ * composeN
+ */
+let splitIntoSpace = (str) => str.split(' ')
+let count = (array) => array.length
+let oddOrEven = (count) => count % 2 === 0 ? 'even' : 'odd'
+const countWords = composeN(composeN(oddOrEven, identity, count), identity, splitIntoSpace)
+console.log(countWords('make smaller or less in amount'))
+
+/**
+ * pipe
+ */
+// let splitIntoSpace = (str) => str.split(' ')
+// let count = (array) => array.length
+// let oddOrEven = (count) => count % 2 === 0 ? 'even' : 'odd'
+// const countWords = pipe(splitIntoSpace,count,oddOrEven)
+// console.log(countWords('make smaller or less in amount'))
+

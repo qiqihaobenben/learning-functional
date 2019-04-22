@@ -19,7 +19,8 @@ import {
   composeN,
   pipe,
   identity,
-  Container
+  Container,
+  MayBe
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -249,6 +250,24 @@ import {
 /**
  * Container
  */
-let double = x => x + x;
- console.log(Container.of(3).map(double))
- console.log(Container.of(3).map(double).map(double).map(double))
+// let double = x => x + x;
+//  console.log(Container.of(3).map(double))
+//  console.log(Container.of(3).map(double).map(double).map(double))
+
+
+/**
+ * MayBe函子
+ */
+let value = 'string';
+
+function upperCase(value) {
+  // 为了避免报错，我们得写这么一个判断
+  if (value != null || value != undefined)
+    return value.toUpperCase()
+}
+
+console.log(upperCase(value))
+
+console.log(MayBe.of(value).map(upperCase))
+let nullValue = null
+console.log(MayBe.of(nullValue).map(upperCase))

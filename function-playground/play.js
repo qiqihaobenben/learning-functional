@@ -1,6 +1,7 @@
 import {
   forEach,
   forEachObject,
+  tap,
   unless,
   every,
   some,
@@ -12,12 +13,13 @@ import {
   concatAll,
   reduce,
   zip,
-  carry,
+  curry,
   partial,
   compose,
   composeN,
   pipe,
-  identity
+  identity,
+  Container
 } from '../lib/es6-functional'
 // import {arrayUtils} from '../lib/es6-functional'
 
@@ -29,6 +31,13 @@ import {
 
 // console.log('********乘以2**********')
 // forEach(array, data => console.log(data*2))
+
+// console.log('********tap**********')
+// forEach(array, data => {
+//   tap(data)(() => {
+//     console.log(data + data)
+//   })
+// })
 
 /**
  * forEachObject
@@ -118,7 +127,7 @@ import {
 /**
  * reduce
  */
-// console.log(reduce([1,2,3], (accumlator,value) => accumlator + value))
+// console.log(reduce([1,2,3], (accumulator,value) => accumulator + value))
 
 /**
  * zip
@@ -126,11 +135,11 @@ import {
 // console.log(zip([1,2,3],[4,5],(x,y) => x*y))
 
 /**
- * carry
+ * curry
  */
 
 //  const multiply = (x,y,z) => x * y * z;
-//  console.log(carry(multiply)(2)(3)(4))
+//  console.log(curry(multiply)(2)(3)(4))
 
 /**
  * partial
@@ -142,6 +151,9 @@ import {
 //     console.log("DO Y task2")
 //   })
 // })
+
+// let prettyPrintJson = partial(JSON.stringify,undefined,null,2)
+// console.log(prettyPrintJson({name:'fangxu',gender:'male'}))
 
 /**
  * compose
@@ -174,8 +186,10 @@ import {
 // let splitIntoSpace = (str) => str.split(' ')
 // let count = (array) => array.length
 // let oddOrEven = (count) => count % 2 === 0 ? 'even' : 'odd'
-// const countWords = composeN(composeN(oddOrEven, identity, count), identity, splitIntoSpace)
+// const countWords = composeN(count, splitIntoSpace)
+// const countWordsAndType = composeN(composeN(oddOrEven, identity, count), identity, splitIntoSpace)
 // console.log(countWords('make smaller or less in amount'))
+// console.log(countWordsAndType('make smaller or less in amount'))
 
 /**
  * pipe
@@ -209,24 +223,32 @@ import {
 // console.log(fullName.next('chen'))
 // fullName.next('fangxu')
 
-function* main() {
-  let a = yield 2;
-  console.log('a : ',a)
-  let dataOne = yield getDataOne()
-  let dataTwo = yield getDataTwo()
-  console.log('data one: ',dataOne)
-  console.log('data two: ',dataTwo)
-}
-let generator = main()
-function getDataOne() {
-  setTimeout(() => {
-    generator.next('dummy one')
-  }, 1000);
-}
-function getDataTwo() {
-  setTimeout(() => {
-    generator.next('dummy two')
-  }, 2000);
-}
-generator.next()
-generator.next()
+// function* main() {
+//   let a = yield 2;
+//   console.log('a : ',a)
+//   let dataOne = yield getDataOne()
+//   let dataTwo = yield getDataTwo()
+//   console.log('data one: ',dataOne)
+//   console.log('data two: ',dataTwo)
+// }
+// let generator = main()
+// function getDataOne() {
+//   setTimeout(() => {
+//     generator.next('dummy one')
+//   }, 1000);
+// }
+// function getDataTwo() {
+//   setTimeout(() => {
+//     generator.next('dummy two')
+//   }, 2000);
+// }
+// generator.next()
+// generator.next()
+
+
+/**
+ * Container
+ */
+let double = x => x + x;
+ console.log(Container.of(3).map(double))
+ console.log(Container.of(3).map(double).map(double).map(double))

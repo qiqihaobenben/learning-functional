@@ -258,16 +258,38 @@ import {
 /**
  * MayBe函子
  */
-let value = 'string';
+// let value = 'string';
 
-function upperCase(value) {
-  // 为了避免报错，我们得写这么一个判断
-  if (value != null || value != undefined)
-    return value.toUpperCase()
-}
+// function upperCase(value) {
+//   // 为了避免报错，我们得写这么一个判断
+//   if (value != null || value != undefined)
+//     return value.toUpperCase()
+// }
 
-console.log(upperCase(value))
+// console.log(upperCase(value))
 
-console.log(MayBe.of(value).map(upperCase))
-let nullValue = null
-console.log(MayBe.of(nullValue).map(upperCase))
+// console.log(MayBe.of(value).map(upperCase))
+// let nullValue = null
+// console.log(MayBe.of(nullValue).map(upperCase))
+
+// let joinExample = MayBe.of(MayBe.of(5));
+// console.log(joinExample)
+// // => MayBe { value: MayBe { value: 5 } }
+// console.log(joinExample.map((insideMayBe) => {
+//   return insideMayBe.map((value) => value + 4)
+// }))
+// // => MayBe { value: MayBe { value: 9 } }
+
+// let joinExample2 = MayBe.of(MayBe.of(5));
+// console.log(joinExample2)
+// // => MayBe { value: MayBe { value: 5 } }
+// console.log(joinExample2.join().map((value) => value + 4))
+// // => MayBe { value: 9 }
+
+let joinExample3 = MayBe.of(MayBe.of(5));
+console.log(joinExample3)
+// => MayBe { value: MayBe { value: 5 } }
+console.log(joinExample3.chain((insideMayBe) => {
+  return insideMayBe.map((value) => value + 4)
+}))
+// => MayBe { value: 9 }
